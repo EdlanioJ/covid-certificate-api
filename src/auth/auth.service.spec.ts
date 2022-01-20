@@ -14,8 +14,6 @@ import { tokenStub } from './tests/stubs/token.stub';
 import { userModelStub } from './tests/stubs/user-model.stub';
 import { AuthPayload } from './types/payload.type';
 
-jest.mock('bcrypt');
-
 describe('AuthService', () => {
   let service: AuthService;
   let userModel: Model<UserDocument>;
