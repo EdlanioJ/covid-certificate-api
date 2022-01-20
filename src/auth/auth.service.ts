@@ -74,7 +74,7 @@ export class AuthService {
   }
 
   private async getTokens(userId: string, username: string): Promise<Tokens> {
-    const [accessToken, refreshToken] = await Promise.all([
+    const [access_token, refresh_token] = await Promise.all([
       this.jwtService.signAsync(
         {
           sub: userId,
@@ -98,8 +98,8 @@ export class AuthService {
     ]);
 
     return {
-      access_token: accessToken,
-      refresh_token: refreshToken,
+      access_token,
+      refresh_token,
     };
   }
 
