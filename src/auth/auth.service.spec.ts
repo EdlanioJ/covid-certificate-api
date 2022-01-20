@@ -19,7 +19,6 @@ jest.mock('bcrypt');
 describe('AuthService', () => {
   let service: AuthService;
   let userModel: Model<UserDocument>;
-  let bcryptCompare: jest.Mock;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -36,8 +35,6 @@ describe('AuthService', () => {
 
     service = module.get<AuthService>(AuthService);
     userModel = module.get<Model<UserDocument>>(getModelToken(UserModelName));
-    bcryptCompare = jest.fn().mockReturnValue(true);
-    (bcrypt.compare as jest.Mock) = bcryptCompare;
     jest.clearAllMocks();
   });
 
@@ -115,13 +112,13 @@ describe('AuthService', () => {
       jest
         .spyOn(userModel, 'findById')
         .mockResolvedValue(userModelStub() as any);
-      bcryptCompare.mockReturnValue(false);
+      jest.spyOn(bcrypt, 'compare').mockResolvedValue(false as never);
       const promise = service.refreshTokens(userId, refreshToken);
       expect(promise).rejects.toThrowError();
     });
 
     it('should return tokens', async () => {
-      bcryptCompare.mockReturnValue(true);
+      jest.spyOn(bcrypt, 'compare').mockResolvedValue(true as never);
       jest
         .spyOn(userModel, 'findById')
         .mockResolvedValue(userModelStub() as any);
