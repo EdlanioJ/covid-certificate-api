@@ -107,16 +107,16 @@ describe('AuthService', () => {
     });
 
     it('should fail if bcrypt compare return false', async () => {
+      (bcrypt.compare as jest.Mock) = jest.fn().mockResolvedValue(false);
       jest
         .spyOn(userModel, 'findById')
         .mockResolvedValue(userModelStub() as any);
-      jest.spyOn(bcrypt, 'compare').mockResolvedValue(false as never);
       const promise = service.refreshTokens(userId, refreshToken);
       expect(promise).rejects.toThrowError();
     });
 
     it('should return tokens', async () => {
-      jest.spyOn(bcrypt, 'compare').mockResolvedValue(true as never);
+      (bcrypt.compare as jest.Mock) = jest.fn().mockResolvedValue(true);
       jest
         .spyOn(userModel, 'findById')
         .mockResolvedValue(userModelStub() as any);
