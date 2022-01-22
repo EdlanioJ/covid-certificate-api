@@ -3,23 +3,24 @@ import { HttpService } from '@nestjs/axios';
 import { map } from 'rxjs/operators';
 import { CaseApiResponse } from './types/response.type';
 import { Cases } from './entities/cases.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CaseService {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly configService: ConfigService,
+  ) {}
 
   async getCases() {
     let cases: Cases;
 
     await this.httpService
-      .get<CaseApiResponse>(
-        'https://corona.lmao.ninja/v2/countries/Angola?yesterday=true&strict=true',
-        {
-          headers: {
-            Accept: 'application/json',
-          },
+      .get<CaseApiResponse>(this.configService.get('CORONA_API_URL'), {
+        headers: {
+          Accept: 'application/json',
         },
-      )
+      })
       .pipe(map((response) => response.data))
       .forEach((response) => {
         cases = new Cases({

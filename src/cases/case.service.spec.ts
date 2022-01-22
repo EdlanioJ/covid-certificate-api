@@ -5,6 +5,8 @@ import { AxiosResponse } from 'axios';
 import { CaseService } from './case.service';
 import { CaseApiResponse } from './types/response.type';
 import { of } from 'rxjs';
+import { ConfigService } from '@nestjs/config';
+import { mockedConfigService } from '../../test/mocks/config.service';
 
 describe('CasesService', () => {
   let service: CaseService;
@@ -13,7 +15,10 @@ describe('CasesService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule],
-      providers: [CaseService],
+      providers: [
+        CaseService,
+        { provide: ConfigService, useValue: mockedConfigService },
+      ],
     }).compile();
 
     service = module.get<CaseService>(CaseService);
