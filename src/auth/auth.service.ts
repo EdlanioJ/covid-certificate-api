@@ -81,7 +81,7 @@ export class AuthService {
           username,
         },
         {
-          expiresIn: this.configService.get<number>('JWT_SECRET_EXPIRE_IN'),
+          expiresIn: this.configService.get('JWT_SECRET_EXPIRE_IN'),
           secret: this.configService.get('JWT_SECRET'),
         },
       ),
