@@ -8,10 +8,11 @@ import {
 } from '../../../schemas/certificate.schema';
 import { UserModelName, UserDocument } from '../../../schemas/user.schema';
 import { AddCertificateService } from './add-certificate.service';
-import { mockBrowser, mockPage } from '../../tests/mocks/puppeteer';
 import { ForbiddenException } from '@nestjs/common';
-import { certificateModelStub } from '../../tests/stubs/certificate.stub';
-import { userModelStub } from '../../../auth/tests/stubs/user-model.stub';
+import { userModelStub } from '../../../../test/stubs/user-model.stub';
+
+import { mockBrowser, mockPage } from '../../../../test/mocks/puppeteer';
+import { certificateModelStub } from '../../../../test/stubs/certificate-model.stub';
 
 jest.mock('puppeteer', () => ({
   launch() {

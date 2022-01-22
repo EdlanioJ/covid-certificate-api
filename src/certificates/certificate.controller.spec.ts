@@ -8,14 +8,15 @@ import { CreateCertificateDto } from './dto/create-certificate.dto';
 import { CertificateModelName } from '../schemas/certificate.schema';
 import { DeleteCertificateService } from './services/delete-certificate/delete-certificate.service';
 import { FindOneCertificateService } from './services/find-one-certificate/find-one-certificate.service';
-import { certificateStub } from './tests/stubs/certificate.stub';
 import { Certificate } from './entities/certificate.entity';
 
+import { certificateStub } from '../../test/stubs/certificate.stub';
+
 jest.mock('./services/delete-certificate/delete-certificate.service', () =>
-  jest.requireActual('./tests/mocks/delete-certificate.service'),
+  jest.requireActual('../../test/mocks/delete-certificate.service'),
 );
 jest.mock('./services/find-one-certificate/find-one-certificate.service', () =>
-  jest.requireActual('./tests/mocks/find-one-certificate.service'),
+  jest.requireActual('../../test/mocks/find-one-certificate.service'),
 );
 
 describe('CertificatesController', () => {

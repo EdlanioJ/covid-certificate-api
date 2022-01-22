@@ -1,11 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { userStub } from './tests/stubs/user.stub';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
+import { userStub } from '../../test/stubs/user.stub';
+
 jest.mock('./user.service', () =>
-  jest.requireActual('./tests/mocks/user.service'),
+  jest.requireActual('../../test/mocks/user.service'),
 );
+
 describe('UsersController', () => {
   let controller: UserController;
   // let service: UserService;

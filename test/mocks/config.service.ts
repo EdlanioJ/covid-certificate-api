@@ -15,6 +15,8 @@ export const mockedConfigService = {
         return 10;
       case 'JWT_REFRESH_SECRET_EXPIRE_IN':
         return '2d';
+      case 'CORONA_API_URL':
+        return 'coronaApiUrl';
     }
   },
 };

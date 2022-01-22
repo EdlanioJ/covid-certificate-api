@@ -2,7 +2,7 @@ import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Request } from 'express';
 
-import { mockedConfigService } from '../tests/mocks/config.service';
+import { mockedConfigService } from '../../../test/mocks/config.service';
 import { AuthPayload } from '../types/payload.type';
 import { RefreshJwtStrategy } from './refresh-jwt.strategy';
 

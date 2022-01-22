@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 
 export const certificateModelStub = () => ({
   _id: new Types.ObjectId('123456789012'),
+  id: 'id',
   ownerId: new Types.ObjectId('123456789012'),
   vaccineName: 'vaccineName',
   certificateId: 'certificateId',

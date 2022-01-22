@@ -4,12 +4,12 @@ import { Request } from 'express';
 import { Profile } from 'passport-google-oauth20';
 
 import { AuthService } from '../auth.service';
-import { mockedConfigService } from '../tests/mocks/config.service';
+import { mockedConfigService } from '../../../test/mocks/config.service';
 import { AuthPayload } from '../types/payload.type';
 import { GoogleStrategy } from './google.strategy';
 
 jest.mock('../auth.service', () =>
-  jest.requireActual('../tests/mocks/auth.service'),
+  jest.requireActual('../../../test/mocks/auth.service'),
 );
 
 const dMock = jest.fn() as (error: Error, payload: AuthPayload) => void;

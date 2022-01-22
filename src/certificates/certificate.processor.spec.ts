@@ -4,8 +4,9 @@ import { CertificateProcessor } from './certificate.processor';
 import { AddCertificateService } from './services/add-certificate/add-certificate.service';
 
 jest.mock('./services/add-certificate/add-certificate.service', () =>
-  jest.requireActual('./tests/mocks/add-certificate.service'),
+  jest.requireActual('../../test/mocks/add-certificate.service'),
 );
+
 describe('CertificateProcessor', () => {
   let processor: CertificateProcessor;
   let addCertificateService: AddCertificateService;

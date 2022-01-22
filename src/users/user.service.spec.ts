@@ -1,7 +1,9 @@
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Model } from 'mongoose';
-import { userModelStub } from '../auth/tests/stubs/user-model.stub';
+
+import { userModelStub } from '../../test/stubs/user-model.stub';
+
 import {
   CertificateModelName,
   CertificateDocument,

@@ -8,10 +8,12 @@ import * as bcrypt from 'bcrypt';
 import { UserModelName, UserDocument } from '../schemas/user.schema';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { mockedConfigService } from './tests/mocks/config.service';
-import { mockedJwtService } from './tests/mocks/jwt.service';
-import { tokenStub } from './tests/stubs/token.stub';
-import { userModelStub } from './tests/stubs/user-model.stub';
+
+import { mockedConfigService } from '../../test/mocks/config.service';
+import { mockedJwtService } from '../../test/mocks/jwt.service';
+import { tokenStub } from '../../test/stubs/token.stub';
+import { userModelStub } from '../../test/stubs/user-model.stub';
+
 import { AuthPayload } from './types/payload.type';
 
 describe('AuthService', () => {

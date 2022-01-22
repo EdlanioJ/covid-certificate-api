@@ -4,14 +4,15 @@ import * as httpMock from 'node-mocks-http';
 import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants';
 
+import { tokensStub } from '../../test/stubs/token.stub';
+
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { tokensStub } from './tests/stubs/token.stub';
 import { AuthPayload } from './types/payload.type';
 import { GetCurrentUser } from './decorators/get-current-user.decorator';
 
 jest.mock('./auth.service', () =>
-  jest.requireActual('./tests/mocks/auth.service'),
+  jest.requireActual('../../test/mocks/auth.service'),
 );
 
 function getDecoratorFactory(decorator: any) {

@@ -1,6 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { mockedConfigService } from '../tests/mocks/config.service';
+import { mockedConfigService } from '../../../test/mocks/config.service';
 import { AuthPayload } from '../types/payload.type';
 import { JwtStrategy } from './jwt.strategy';
 
