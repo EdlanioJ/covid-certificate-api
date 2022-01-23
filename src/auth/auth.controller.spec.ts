@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import * as httpMock from 'node-mocks-http';
 import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants';
+import { Response } from 'express';
 
 import { tokensStub } from '../../test/stubs/token.stub';
 
@@ -44,6 +45,7 @@ describe('AuthController', () => {
 
   it('should call googleLogin', () => {
     controller.googleLogin();
+    controller.googleLoginMobile();
   });
   describe('googleLoginCallback', () => {
     const authPayload: AuthPayload = {
@@ -56,6 +58,24 @@ describe('AuthController', () => {
       const tokens = await controller.googleLoginCallback(authPayload);
       expect(spy).toHaveBeenCalledWith(authPayload);
       expect(tokens).toEqual(tokensStub());
+    });
+  });
+
+  describe('googleCallbackMobile', () => {
+    const authPayload: AuthPayload = {
+      sub: 'sub',
+      username: 'username',
+    };
+
+    const res = {
+      redirect: jest.fn(),
+    } as any;
+    it('should call authService.login', async () => {
+      const spy = jest.spyOn(authService, 'login');
+      const responseSpy = jest.spyOn(res, 'redirect');
+      await controller.googleCallbackMobile(res, authPayload);
+      expect(spy).toHaveBeenCalledWith(authPayload);
+      expect(responseSpy).toHaveBeenCalledTimes(1);
     });
   });
 

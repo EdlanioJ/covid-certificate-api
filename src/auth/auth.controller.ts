@@ -5,6 +5,7 @@ import {
   UseGuards,
   HttpStatus,
   Post,
+  Res,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -14,11 +15,14 @@ import {
   ApiHeader,
   ApiExcludeEndpoint,
 } from '@nestjs/swagger';
+import { Response } from 'express';
+import * as url from 'url';
 
 import { AuthService } from './auth.service';
 import { GetCurrentUser } from './decorators/get-current-user.decorator';
 import { Public } from './decorators/public.decorator';
 import { Tokens } from './entities/tokens.entity';
+import { GoogleMobileGuard } from './guards/google-mobile.guard';
 import { GoogleGuard } from './guards/google.guard';
 import { JwtGuard } from './guards/jwt.guard';
 import { RefreshJwtGuard } from './guards/refresh-jwt.guard';
@@ -32,17 +36,39 @@ export class AuthController {
   @ApiExcludeEndpoint()
   @Get('google')
   @UseGuards(GoogleGuard)
-  googleLogin() {
-    return;
-  }
+  googleLogin() {}
+
+  @Get('google/mobile')
+  @UseGuards(GoogleMobileGuard)
+  googleLoginMobile() {}
 
   @ApiExcludeEndpoint()
-  @Public()
   @Get('google/callback')
   @HttpCode(HttpStatus.OK)
   @UseGuards(GoogleGuard)
   async googleLoginCallback(@GetCurrentUser() user: AuthPayload) {
     return this.authService.login(user);
+  }
+
+  @Get('google/mobile/callback')
+  @UseGuards(GoogleMobileGuard)
+  async googleCallbackMobile(
+    @Res() res: Response,
+    @GetCurrentUser() user: AuthPayload,
+  ) {
+    const { access_token, refresh_token } = await this.authService.login(user);
+
+    const uri = url.format({
+      protocol: 'https',
+      hostname: 'auth.expo.io',
+      pathname: '/@edlanio/cvd-ao',
+      query: {
+        access_token,
+        refresh_token,
+      },
+    });
+
+    return res.redirect(uri);
   }
 
   @ApiHeader({

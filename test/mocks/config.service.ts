@@ -17,6 +17,8 @@ export const mockedConfigService = {
         return '2d';
       case 'CORONA_API_URL':
         return 'coronaApiUrl';
+      case 'GOOGLE_MOBILE_CALLBACK_URL':
+        return 'googleMobileCallbackUrl';
     }
   },
 };

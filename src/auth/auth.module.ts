@@ -9,6 +9,7 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { RefreshJwtStrategy } from './strategies/refresh-jwt.strategy';
 import { UserModelName, UserSchema } from '../schemas/user.schema';
+import { GoogleMobileStrategy } from './strategies/google-mobile.strategy';
 
 @Global()
 @Module({
@@ -18,7 +19,13 @@ import { UserModelName, UserSchema } from '../schemas/user.schema';
     JwtModule.register({}),
   ],
   exports: [AuthService, JwtStrategy],
-  providers: [AuthService, GoogleStrategy, JwtStrategy, RefreshJwtStrategy],
+  providers: [
+    AuthService,
+    GoogleStrategy,
+    GoogleMobileStrategy,
+    JwtStrategy,
+    RefreshJwtStrategy,
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}
