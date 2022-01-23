@@ -7,6 +7,7 @@ import {
   Post,
   Res,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import {
   ApiTags,
   ApiBearerAuth,
@@ -31,7 +32,10 @@ import { AuthPayload } from './types/payload.type';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @ApiExcludeEndpoint()
   @Get('google')
@@ -60,8 +64,8 @@ export class AuthController {
 
     const uri = url.format({
       protocol: 'https',
-      hostname: 'auth.expo.io',
-      pathname: '/@edlanioj/cvd-ao',
+      hostname: this.configService.get('MOBILE_AUTH_HOSTNAME'),
+      pathname: this.configService.get('MOBILE_AUTH_PATHNAME'),
       query: {
         access_token,
         refresh_token,

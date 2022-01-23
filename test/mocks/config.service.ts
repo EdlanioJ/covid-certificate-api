@@ -19,6 +19,10 @@ export const mockedConfigService = {
         return 'coronaApiUrl';
       case 'GOOGLE_MOBILE_CALLBACK_URL':
         return 'googleMobileCallbackUrl';
+      case 'MOBILE_AUTH_HOSTNAME':
+        return 'mobileAuthHostname';
+      case 'MOBILE_AUTH_PATHNAME':
+        return 'mobileAuthPathname';
     }
   },
 };

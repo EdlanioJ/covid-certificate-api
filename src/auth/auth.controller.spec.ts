@@ -11,6 +11,8 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { AuthPayload } from './types/payload.type';
 import { GetCurrentUser } from './decorators/get-current-user.decorator';
+import { ConfigService } from '@nestjs/config';
+import { mockedConfigService } from '../../test/mocks/config.service';
 
 jest.mock('./auth.service', () =>
   jest.requireActual('../../test/mocks/auth.service'),
@@ -32,7 +34,13 @@ describe('AuthController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
-      providers: [AuthService],
+      providers: [
+        AuthService,
+        {
+          provide: ConfigService,
+          useValue: mockedConfigService,
+        },
+      ],
     }).compile();
 
     authService = module.get<AuthService>(AuthService);
