@@ -61,7 +61,7 @@ export class AuthController {
     const uri = url.format({
       protocol: 'https',
       hostname: 'auth.expo.io',
-      pathname: '/@edlanio/cvd-ao',
+      pathname: '/@edlanioj/cvd-ao',
       query: {
         access_token,
         refresh_token,
