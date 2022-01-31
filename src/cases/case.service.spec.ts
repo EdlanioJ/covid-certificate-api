@@ -7,6 +7,7 @@ import { CaseApiResponse } from './types/response.type';
 import { of } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 import { mockedConfigService } from '../../test/mocks/config.service';
+import { caseApiResponseStub } from '../../test/stubs/case-api-response.stub';
 
 describe('CasesService', () => {
   let service: CaseService;
@@ -31,18 +32,7 @@ describe('CasesService', () => {
 
   describe('getCases', () => {
     const axiosResponse: AxiosResponse<CaseApiResponse> = {
-      data: {
-        active: 1,
-        cases: 1,
-        country: 'Angola',
-        critical: 1,
-        deaths: 1,
-        recovered: 1,
-        todayCases: 1,
-        todayDeaths: 1,
-        todayRecovered: 1,
-        updated: 1,
-      },
+      data: caseApiResponseStub(),
       status: 200,
       statusText: 'OK',
       headers: {},

@@ -24,6 +24,10 @@ export class CaseService {
       .pipe(map((response) => response.data))
       .forEach((response) => {
         cases = new Cases({
+          countryInfo: {
+            flag: response.countryInfo.flag,
+            iso: response.countryInfo.iso2,
+          },
           active: response.active,
           cases: response.cases,
           country: response.country,

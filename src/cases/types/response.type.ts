@@ -1,6 +1,10 @@
 export type CaseApiResponse = {
   updated: number;
   country: string;
+  countryInfo: {
+    iso2: string;
+    flag: string;
+  };
   cases: number;
   todayCases: number;
   deaths: number;

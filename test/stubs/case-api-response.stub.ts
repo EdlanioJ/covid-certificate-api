@@ -4,6 +4,10 @@ export const caseApiResponseStub = (): CaseApiResponse => ({
   active: 1,
   cases: 1,
   country: 'Angola',
+  countryInfo: {
+    flag: 'ao.png',
+    iso2: 'ao',
+  },
   critical: 1,
   deaths: 1,
   recovered: 1,

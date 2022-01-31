@@ -5,6 +5,10 @@ export const casesStubs = (): Cases =>
     active: 1,
     cases: 1,
     country: 'Angola',
+    countryInfo: {
+      flag: 'ao.png',
+      iso: 'ao',
+    },
     critical: 1,
     deaths: 1,
     recovered: 1,

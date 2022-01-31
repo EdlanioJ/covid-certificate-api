@@ -5,6 +5,12 @@ export class Cases {
   country: string;
 
   @ApiProperty()
+  countryInfo: {
+    iso: string;
+    flag: string;
+  };
+
+  @ApiProperty()
   cases: number;
 
   @ApiProperty()
